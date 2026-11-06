@@ -14,7 +14,7 @@ dependencies = [
 [project.optional-dependencies]
 dev = ["pytest>=8,<10", "ruff>=0.9", "pip-audit>=2.7", "scikit-learn>=1.6", "pandas>=2.2"]
 [build-system]
-requires = ["setuptools>=75"]
+requires = ["setuptools>=84.1.0"]
 build-backend = "setuptools.build_meta"
 [tool.setuptools.packages.find]
 include = ["app*"]

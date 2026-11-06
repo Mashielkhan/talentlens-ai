@@ -6,9 +6,9 @@ COPY pyproject.toml ./
 COPY app ./app
 # Install the CPU distribution first; the default Linux PyPI torch wheel can
 # otherwise pull GPU runtimes that this application does not use.
-RUN pip install --no-cache-dir 'torch>=2.6,<3' --index-url https://download.pytorch.org/whl/cpu
-RUN pip install --no-cache-dir . && python -m spacy download en_core_web_sm
-RUN if [ "$INSTALL_DEV" = "true" ]; then pip install --no-cache-dir '.[dev]'; fi
+RUN --mount=type=cache,target=/root/.cache/pip pip install --timeout=120 'torch>=2.6,<3' --index-url https://download.pytorch.org/whl/cpu
+RUN --mount=type=cache,target=/root/.cache/pip pip install --timeout=120 --upgrade 'setuptools>=84.1.0' && pip install --timeout=120 . && python -m spacy download en_core_web_sm
+RUN --mount=type=cache,target=/root/.cache/pip if [ "$INSTALL_DEV" = "true" ]; then pip install --timeout=120 '.[dev]'; fi
 COPY alembic ./alembic
 COPY alembic.ini ./
 COPY tests ./tests

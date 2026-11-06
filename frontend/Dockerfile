@@ -2,7 +2,7 @@ FROM node:22-bookworm-slim AS build
 WORKDIR /app
 RUN corepack enable
 COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
-RUN pnpm install --frozen-lockfile
+RUN --mount=type=cache,id=talentlens-pnpm,target=/pnpm/store pnpm install --frozen-lockfile --store-dir=/pnpm/store --network-concurrency=4 --fetch-timeout=300000 --fetch-retries=4
 COPY . .
 ARG API_INTERNAL_URL=http://api:8000
 ENV API_INTERNAL_URL=$API_INTERNAL_URL NEXT_TELEMETRY_DISABLED=1
