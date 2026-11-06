@@ -64,7 +64,7 @@ services:
       redis: {condition: service_healthy}
   frontend:
     build: ./frontend
-    ports: ["127.0.0.1:3000:3000"]
+    ports: ["127.0.0.1:${FRONTEND_PORT:-3000}:3000"]
     environment:
       API_INTERNAL_URL: http://api:8000
     depends_on:

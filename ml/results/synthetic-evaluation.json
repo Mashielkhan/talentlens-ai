@@ -1,0 +1,203 @@
+{
+  "scope": "20 original synthetic documents / 5 synthetic roles; developer-authored labels; smoke evaluation, not external validation",
+  "model": "sentence-transformers/all-MiniLM-L6-v2@c9745ed1d9f207416be6d2e6f8de32d1f16199bf",
+  "platform": "Linux-6.18.58.1-microsoft-standard-WSL2-x86_64-with-glibc2.41",
+  "as_of_date": "2026-01-01",
+  "skills": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0
+  },
+  "email_exact_accuracy": 1.0,
+  "parsing_seconds": 10.585364561999995,
+  "embedding_seconds": 24.06360351100011,
+  "jobs": [
+    {
+      "job": "Python Backend Engineer \u2014 synthetic demo",
+      "hybrid_seconds": 0.32153344700009256,
+      "cross_encoder_seconds": null,
+      "metrics": {
+        "keyword": {
+          "precision_at_3": 0.6666666666666666,
+          "recall_at_3": 1.0,
+          "mrr": 1.0,
+          "ndcg_at_3": 0.9612472558382994
+        },
+        "semantic": {
+          "precision_at_3": 0.6666666666666666,
+          "recall_at_3": 1.0,
+          "mrr": 1.0,
+          "ndcg_at_3": 0.894999002123018
+        },
+        "hybrid": {
+          "precision_at_3": 0.6666666666666666,
+          "recall_at_3": 1.0,
+          "mrr": 1.0,
+          "ndcg_at_3": 1.0
+        },
+        "semantic_skills": {
+          "precision_at_3": 0.6666666666666666,
+          "recall_at_3": 1.0,
+          "mrr": 1.0,
+          "ndcg_at_3": 1.0
+        },
+        "semantic_skills_experience": {
+          "precision_at_3": 0.6666666666666666,
+          "recall_at_3": 1.0,
+          "mrr": 1.0,
+          "ndcg_at_3": 1.0
+        }
+      }
+    },
+    {
+      "job": "React Frontend Engineer \u2014 synthetic demo",
+      "hybrid_seconds": 0.06484851699997307,
+      "cross_encoder_seconds": null,
+      "metrics": {
+        "keyword": {
+          "precision_at_3": 0.6666666666666666,
+          "recall_at_3": 1.0,
+          "mrr": 1.0,
+          "ndcg_at_3": 0.9612472558382994
+        },
+        "semantic": {
+          "precision_at_3": 0.6666666666666666,
+          "recall_at_3": 1.0,
+          "mrr": 1.0,
+          "ndcg_at_3": 1.0
+        },
+        "hybrid": {
+          "precision_at_3": 0.6666666666666666,
+          "recall_at_3": 1.0,
+          "mrr": 1.0,
+          "ndcg_at_3": 1.0
+        },
+        "semantic_skills": {
+          "precision_at_3": 0.6666666666666666,
+          "recall_at_3": 1.0,
+          "mrr": 1.0,
+          "ndcg_at_3": 1.0
+        },
+        "semantic_skills_experience": {
+          "precision_at_3": 0.6666666666666666,
+          "recall_at_3": 1.0,
+          "mrr": 1.0,
+          "ndcg_at_3": 1.0
+        }
+      }
+    },
+    {
+      "job": "Machine Learning Engineer \u2014 synthetic demo",
+      "hybrid_seconds": 0.08093726399965817,
+      "cross_encoder_seconds": null,
+      "metrics": {
+        "keyword": {
+          "precision_at_3": 0.6666666666666666,
+          "recall_at_3": 1.0,
+          "mrr": 1.0,
+          "ndcg_at_3": 0.894999002123018
+        },
+        "semantic": {
+          "precision_at_3": 0.6666666666666666,
+          "recall_at_3": 1.0,
+          "mrr": 1.0,
+          "ndcg_at_3": 0.9862522452232095
+        },
+        "hybrid": {
+          "precision_at_3": 0.6666666666666666,
+          "recall_at_3": 1.0,
+          "mrr": 1.0,
+          "ndcg_at_3": 1.0
+        },
+        "semantic_skills": {
+          "precision_at_3": 0.6666666666666666,
+          "recall_at_3": 1.0,
+          "mrr": 1.0,
+          "ndcg_at_3": 0.9862522452232095
+        },
+        "semantic_skills_experience": {
+          "precision_at_3": 0.6666666666666666,
+          "recall_at_3": 1.0,
+          "mrr": 1.0,
+          "ndcg_at_3": 1.0
+        }
+      }
+    },
+    {
+      "job": "Data Analyst \u2014 synthetic demo",
+      "hybrid_seconds": 0.07351442700019106,
+      "cross_encoder_seconds": null,
+      "metrics": {
+        "keyword": {
+          "precision_at_3": 0.6666666666666666,
+          "recall_at_3": 1.0,
+          "mrr": 1.0,
+          "ndcg_at_3": 0.9612472558382994
+        },
+        "semantic": {
+          "precision_at_3": 0.6666666666666666,
+          "recall_at_3": 1.0,
+          "mrr": 1.0,
+          "ndcg_at_3": 1.0
+        },
+        "hybrid": {
+          "precision_at_3": 0.6666666666666666,
+          "recall_at_3": 1.0,
+          "mrr": 1.0,
+          "ndcg_at_3": 1.0
+        },
+        "semantic_skills": {
+          "precision_at_3": 0.6666666666666666,
+          "recall_at_3": 1.0,
+          "mrr": 1.0,
+          "ndcg_at_3": 1.0
+        },
+        "semantic_skills_experience": {
+          "precision_at_3": 0.6666666666666666,
+          "recall_at_3": 1.0,
+          "mrr": 1.0,
+          "ndcg_at_3": 1.0
+        }
+      }
+    },
+    {
+      "job": "DevOps Engineer \u2014 synthetic demo",
+      "hybrid_seconds": 0.07487991600009991,
+      "cross_encoder_seconds": null,
+      "metrics": {
+        "keyword": {
+          "precision_at_3": 0.6666666666666666,
+          "recall_at_3": 1.0,
+          "mrr": 1.0,
+          "ndcg_at_3": 0.9612472558382994
+        },
+        "semantic": {
+          "precision_at_3": 0.6666666666666666,
+          "recall_at_3": 1.0,
+          "mrr": 1.0,
+          "ndcg_at_3": 1.0
+        },
+        "hybrid": {
+          "precision_at_3": 0.6666666666666666,
+          "recall_at_3": 1.0,
+          "mrr": 1.0,
+          "ndcg_at_3": 1.0
+        },
+        "semantic_skills": {
+          "precision_at_3": 0.6666666666666666,
+          "recall_at_3": 1.0,
+          "mrr": 1.0,
+          "ndcg_at_3": 1.0
+        },
+        "semantic_skills_experience": {
+          "precision_at_3": 0.6666666666666666,
+          "recall_at_3": 1.0,
+          "mrr": 1.0,
+          "ndcg_at_3": 1.0
+        }
+      }
+    }
+  ],
+  "cross_encoder": null,
+  "cross_revision": null
+}

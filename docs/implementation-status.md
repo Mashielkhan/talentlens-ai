@@ -19,6 +19,8 @@ This file distinguishes implemented source from executed verification. Checkpoin
 | GitHub quality workflow | Passed after upgrading vulnerable setuptools build tooling |
 | Pinned spaCy / MiniLM model warm-up and real inference test | Passed in the full GitHub workflow; 384-dimensional embeddings; 1 model test passed |
 | Full Docker applicant/recruiter browser journey | Passed; both Playwright tests passed in 30.3 seconds |
+| Local Docker browser journey | Both Playwright tests passed in 1.2 minutes using installed Chrome at localhost:3001 |
+| Synthetic evaluation | Executed; measured JSON/CSV saved under `ml/results/`; see `model-evaluation.md` for scope and limitations |
 
 Executed workflow records: [quality checks](https://github.com/Mashielkhan/talentlens-ai/actions/runs/42210546607) and [full Docker/model/journey validation](https://github.com/Mashielkhan/talentlens-ai/actions/runs/42210731731). Combined backend coverage is 38 tests; the model check runs separately from the other 37.
 
@@ -36,7 +38,7 @@ The test run found and fixed nested skill alias duplication: `React JS` no longe
 
 ### Integration checkpoint
 
-Docker Desktop is installed, with healthy PostgreSQL/pgvector and Redis containers. Local database tests and both application-image builds pass; long downloads required persistent build caches and longer timeouts. The full GitHub Docker/model/browser workflow passed. Local application startup is being verified separately. The public source repository is https://github.com/Mashielkhan/talentlens-ai; no hosted application is deployed.
+Docker Desktop is installed, with healthy PostgreSQL/pgvector and Redis containers. The local application and both browser tests pass at http://localhost:3001, with the pinned model cached in a persistent volume. Port 3000 was occupied by an existing process, so the ignored local `.env` uses port/origin 3001. The default shared configuration remains port 3000. Long downloads required persistent build caches and longer timeouts. The full GitHub Docker/model/browser workflow passed. The public source repository is https://github.com/Mashielkhan/talentlens-ai; no hosted application is deployed.
 
 | Phase | Source status | Verification / remaining work |
 |---|---|---|
@@ -47,11 +49,11 @@ Docker Desktop is installed, with healthy PostgreSQL/pgvector and Redis containe
 | 5. Jobs | Draft/publish/archive, requirements review, weighted skills, application consent and withdrawal | Full browser journey passed with actual API, database and worker. |
 | 6. Matching | Pinned MiniLM model, token-aware chunks, vector persistence and authorized exact retrieval, hybrid scoring | Real model consistency test and private/recruiter browser matching passed. |
 | 7. Explainability | Effective weights, evidence, uncertainty, deterministic gaps/resources, private PDF exports | Scoring and PDF content/pagination tests passed. Human visual report review pending. |
-| 8. Advanced retrieval | Exact pgvector shortlist of 100; optional offline cross-encoder experiment runner | No real retrieval/reranking benchmark executed. No quality claims. |
+| 8. Advanced retrieval | Exact pgvector shortlist of 100; optional offline cross-encoder experiment runner | Synthetic keyword/semantic/hybrid evaluation executed. Cross-encoder and scale benchmarks remain unexecuted. |
 | 9. UI | Landing, auth, dashboards, resume/profile editing, jobs, matching, comparison, analytics, settings | Unit tests, lint, TypeScript, production builds and two browser tests passed. |
 | 10. Testing | Integration checkpoint reached | 38 backend + 4 frontend unit tests and 2 browser tests passed across workflows. |
 | 11. Deployment | Compose and Dockerfiles; public GitHub repository | Full Docker validation passed on GitHub. No hosted application deployed. |
-| 12. Portfolio | README, architecture, ER diagram, API/security/privacy/deployment/evaluation docs and CV walkthrough | Real screenshots and measured model evaluation pending. No hosted URL invented. |
+| 12. Portfolio | README, architecture, ER diagram, API/security/privacy/deployment/evaluation docs and CV walkthrough | Measured synthetic evaluation included; portfolio screenshots remain optional follow-up. No hosted URL invented. |
 
 ## Environment
 

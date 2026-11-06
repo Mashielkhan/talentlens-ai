@@ -68,6 +68,8 @@ docker compose logs -f worker
 
 Open [the application](http://localhost:3000), [interactive API documentation](http://localhost:8000/docs), or [readiness](http://localhost:8000/api/v1/ready). The migration service runs before API/worker startup. First model downloads require internet access and can take several minutes. Do not expose development credentials or local ports publicly.
 
+If port 3000 is already occupied, set both `FRONTEND_PORT=3001` and `APP_ORIGIN=http://localhost:3001` in `.env`, then run `docker compose up -d` and open `http://localhost:3001`. Keep the origin and browser port aligned for CSRF validation.
+
 The default `.env.example` uses explicit **development-only** values. `APP_ORIGIN` must exactly match the browser origin. Production requires HTTPS, `COOKIE_SECURE=true`, private storage and fresh database credentials. Configure S3 using standard AWS credentials outside source control. See [environment and deployment guidance](docs/deployment.md).
 
 ### Native development with containerized dependencies
