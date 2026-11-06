@@ -1,0 +1,76 @@
+name: talentlens
+x-backend: &backend
+  image: talentlens-backend:local
+  build:
+    context: ./backend
+    args:
+      INSTALL_DEV: ${INSTALL_DEV:-false}
+  env_file: .env
+  volumes:
+    - resumes:/data/resumes
+    - models:/data/models
+  depends_on:
+    db: {condition: service_healthy}
+    redis: {condition: service_healthy}
+services:
+  db:
+    image: pgvector/pgvector:pg17
+    environment:
+      POSTGRES_USER: talentlens
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Copy .env.example to .env}
+      POSTGRES_DB: talentlens
+    volumes: [postgres:/var/lib/postgresql/data]
+    ports: ["127.0.0.1:5432:5432"]
+    healthcheck:
+      test: [CMD-SHELL, "pg_isready -U talentlens -d talentlens"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+  redis:
+    image: redis:7-alpine
+    command: redis-server --appendonly yes
+    volumes: [redis:/data]
+    ports: ["127.0.0.1:6379:6379"]
+    healthcheck:
+      test: [CMD, redis-cli, ping]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+  migrate:
+    <<: *backend
+    command: alembic upgrade head
+  api:
+    <<: *backend
+    ports: ["127.0.0.1:8000:8000"]
+    depends_on:
+      migrate: {condition: service_completed_successfully}
+      redis: {condition: service_healthy}
+    healthcheck:
+      test: [CMD, python, -c, "import urllib.request; urllib.request.urlopen('http://localhost:8000/api/v1/ready')"]
+      interval: 15s
+      timeout: 5s
+      retries: 10
+  worker:
+    <<: *backend
+    command: celery -A app.workers.tasks:celery worker --loglevel=INFO --concurrency=1
+    depends_on:
+      migrate: {condition: service_completed_successfully}
+      redis: {condition: service_healthy}
+  beat:
+    <<: *backend
+    command: celery -A app.workers.tasks:celery beat --loglevel=INFO --schedule=/tmp/celerybeat-schedule
+    depends_on:
+      migrate: {condition: service_completed_successfully}
+      redis: {condition: service_healthy}
+  frontend:
+    build: ./frontend
+    ports: ["127.0.0.1:3000:3000"]
+    environment:
+      API_INTERNAL_URL: http://api:8000
+    depends_on:
+      api: {condition: service_healthy}
+volumes:
+  postgres:
+  resumes:
+  models:
+  redis:

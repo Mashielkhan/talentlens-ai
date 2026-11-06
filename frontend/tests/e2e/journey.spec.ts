@@ -1,0 +1,73 @@
+import { test, expect } from "@playwright/test";
+import path from "node:path";
+test("real applicant and recruiter journey", async ({ browser }) => {
+  test.skip(
+    process.env.RUN_FULL_E2E !== "1",
+    "Requires PostgreSQL, Redis, model worker and scripts/generate-demo.py fixtures",
+  );
+  const applicantContext = await browser.newContext(),
+    recruiterContext = await browser.newContext();
+  const applicant = await applicantContext.newPage(),
+    recruiter = await recruiterContext.newPage();
+  const suffix = Date.now();
+  for (const [page, role] of [
+    [recruiter, "recruiter"],
+    [applicant, "applicant"],
+  ] as const) {
+    await page.goto("/register");
+    if (role === "recruiter") {
+      await page.getByRole("button", { name: "I’m hiring" }).click();
+      await page.getByLabel("Company name").fill("Synthetic E2E Company");
+    }
+    await page.getByLabel("Full name").fill(`Synthetic ${role}`);
+    await page.getByLabel("Email address").fill(`${role}-${suffix}@example.org`);
+    await page.getByLabel("Password", { exact: true }).fill("Synthetic-E2E-Password-2048!");
+    await page.getByLabel("Confirm password").fill("Synthetic-E2E-Password-2048!");
+    await page.getByRole("button", { name: "Create account", exact: true }).click();
+    await expect(page.getByRole("heading", { name: "Overview", exact: true })).toBeVisible();
+  }
+  await recruiter.goto("/jobs/new");
+  await recruiter.getByLabel("Job title").fill("Synthetic Python Backend Engineer");
+  await recruiter.getByLabel("Company", { exact: true }).fill("Synthetic E2E Company");
+  await recruiter
+    .getByLabel("Responsibilities & qualifications")
+    .fill("Build Python backend REST APIs using FastAPI and PostgreSQL with Docker containers.");
+  await recruiter.getByLabel(/Required skills/).fill("Python:5, FastAPI:4, PostgreSQL:3");
+  await recruiter.getByLabel("Visibility").selectOption("PUBLISHED");
+  await recruiter.getByLabel(/I reviewed these requirements/).check();
+  await recruiter.getByRole("button", { name: "Save job" }).click();
+  await expect(recruiter).toHaveURL(/\/jobs\/[a-f0-9-]+$/);
+  const jobUrl = recruiter.url();
+  await applicant.goto("/resumes");
+  await applicant
+    .getByLabel("Resume file")
+    .setInputFiles(path.resolve("../ml/datasets/generated/synthetic-01.pdf"));
+  await expect(applicant.getByText("completed", { exact: true }).first()).toBeVisible({ timeout: 150000 });
+  await applicant.goto(jobUrl);
+  const selector = applicant.getByLabel("Choose a processed resume");
+  await expect(selector.locator("option")).toHaveCount(2);
+  await selector.selectOption({ index: 1 });
+  await applicant.getByRole("button", { name: "Analyze privately" }).click();
+  await expect(applicant.getByRole("link", { name: "View analysis", exact: true })).toBeVisible({
+    timeout: 150000,
+  });
+  await applicant.getByLabel(/I consent to share/).check();
+  await applicant.getByRole("button", { name: "Submit application" }).click();
+  await expect(applicant.getByRole("button", { name: "Application submitted" })).toBeVisible();
+  await recruiter.getByRole("button", { name: "Analyze applicants" }).click();
+  await expect(recruiter.getByRole("link", { name: "View analysis", exact: true })).toBeVisible({
+    timeout: 150000,
+  });
+  await applicant.getByRole("link", { name: "View analysis", exact: true }).click();
+  await expect(applicant.getByText("Compatibility Index", { exact: true })).toBeVisible();
+  const download = applicant.waitForEvent("download");
+  await applicant.getByRole("link", { name: "Download PDF" }).click();
+  expect((await download).suggestedFilename()).toMatch(/\.pdf$/);
+  await applicant.goto("/resumes");
+  await applicant.getByRole("link", { name: /Review synthetic-01/ }).click();
+  applicant.once("dialog", (dialog) => dialog.accept());
+  await applicant.getByRole("button", { name: "Delete", exact: true }).click();
+  await expect(applicant).toHaveURL(/\/resumes$/);
+  await applicantContext.close();
+  await recruiterContext.close();
+});

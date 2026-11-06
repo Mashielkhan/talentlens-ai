@@ -1,0 +1,147 @@
+[
+  {
+    "title": "Python Backend Engineer \u2014 synthetic demo",
+    "company": "Synthetic Example Labs",
+    "description": "Build Python backend REST APIs using FastAPI and PostgreSQL. Package services with Docker and write tests.",
+    "required_skills": [
+      {
+        "name": "Python",
+        "weight": 5
+      },
+      {
+        "name": "FastAPI",
+        "weight": 4
+      },
+      {
+        "name": "PostgreSQL",
+        "weight": 3
+      }
+    ],
+    "preferred_skills": [
+      {
+        "name": "Docker",
+        "weight": 1
+      }
+    ],
+    "min_experience_months": 24,
+    "education_requirement": "Computer Science",
+    "status": "PUBLISHED",
+    "requirements_confirmed": true
+  },
+  {
+    "title": "React Frontend Engineer \u2014 synthetic demo",
+    "company": "Synthetic Example Labs",
+    "description": "Develop accessible React interfaces using TypeScript and CSS. Test responsive browser experiences with Playwright.",
+    "required_skills": [
+      {
+        "name": "React",
+        "weight": 5
+      },
+      {
+        "name": "TypeScript",
+        "weight": 4
+      },
+      {
+        "name": "CSS",
+        "weight": 3
+      }
+    ],
+    "preferred_skills": [
+      {
+        "name": "Playwright",
+        "weight": 1
+      }
+    ],
+    "min_experience_months": 24,
+    "education_requirement": "Computer Science",
+    "status": "PUBLISHED",
+    "requirements_confirmed": true
+  },
+  {
+    "title": "Machine Learning Engineer \u2014 synthetic demo",
+    "company": "Synthetic Example Labs",
+    "description": "Train and evaluate machine learning models with Python, PyTorch and scikit-learn. Build reproducible experiments.",
+    "required_skills": [
+      {
+        "name": "Python",
+        "weight": 5
+      },
+      {
+        "name": "PyTorch",
+        "weight": 4
+      },
+      {
+        "name": "Machine Learning",
+        "weight": 3
+      }
+    ],
+    "preferred_skills": [
+      {
+        "name": "scikit-learn",
+        "weight": 1
+      }
+    ],
+    "min_experience_months": 24,
+    "education_requirement": "Computer Science",
+    "status": "PUBLISHED",
+    "requirements_confirmed": true
+  },
+  {
+    "title": "Data Analyst \u2014 synthetic demo",
+    "company": "Synthetic Example Labs",
+    "description": "Analyze business data with SQL and pandas. Communicate findings in Tableau dashboards and Excel reports.",
+    "required_skills": [
+      {
+        "name": "SQL",
+        "weight": 5
+      },
+      {
+        "name": "pandas",
+        "weight": 4
+      },
+      {
+        "name": "Tableau",
+        "weight": 3
+      }
+    ],
+    "preferred_skills": [
+      {
+        "name": "Excel",
+        "weight": 1
+      }
+    ],
+    "min_experience_months": 24,
+    "education_requirement": "Computer Science",
+    "status": "PUBLISHED",
+    "requirements_confirmed": true
+  },
+  {
+    "title": "DevOps Engineer \u2014 synthetic demo",
+    "company": "Synthetic Example Labs",
+    "description": "Operate container services with Docker and Kubernetes. Manage AWS infrastructure using Terraform.",
+    "required_skills": [
+      {
+        "name": "Docker",
+        "weight": 5
+      },
+      {
+        "name": "Kubernetes",
+        "weight": 4
+      },
+      {
+        "name": "AWS",
+        "weight": 3
+      }
+    ],
+    "preferred_skills": [
+      {
+        "name": "Terraform",
+        "weight": 1
+      }
+    ],
+    "min_experience_months": 24,
+    "education_requirement": "Computer Science",
+    "status": "PUBLISHED",
+    "requirements_confirmed": true
+  }
+]

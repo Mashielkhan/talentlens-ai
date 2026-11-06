@@ -1,0 +1,54 @@
+name: Quality checks
+on: [push, pull_request]
+permissions:
+  contents: read
+jobs:
+  backend:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: pgvector/pgvector:pg17
+        env:
+          POSTGRES_USER: talentlens
+          POSTGRES_PASSWORD: ci-test-only
+          POSTGRES_DB: talentlens_test
+        ports: ["5432:5432"]
+        options: >-
+          --health-cmd "pg_isready -U talentlens -d talentlens_test"
+          --health-interval 5s --health-timeout 5s --health-retries 20
+      redis:
+        image: redis:7-alpine
+        ports: ["6379:6379"]
+    env:
+      DATABASE_URL: postgresql+psycopg://talentlens:ci-test-only@localhost:5432/talentlens_test
+      TEST_DATABASE_URL: postgresql+psycopg://talentlens:ci-test-only@localhost:5432/talentlens_test
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12', cache: pip, cache-dependency-path: backend/pyproject.toml}
+      - run: pip install 'torch>=2.6,<3' --index-url https://download.pytorch.org/whl/cpu
+      - run: pip install -e './backend[dev]'
+      - run: ruff check backend scripts ml
+      - run: alembic upgrade head
+        working-directory: backend
+      - run: pytest -q -m 'not models'
+        working-directory: backend
+      - run: pip-audit --progress-spinner off
+  frontend:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with: {version: 11.25.0}
+      - uses: actions/setup-node@v4
+        with: {node-version: '22', cache: pnpm, cache-dependency-path: frontend/pnpm-lock.yaml}
+      - run: pnpm install --frozen-lockfile
+        working-directory: frontend
+      - run: pnpm lint && pnpm typecheck && pnpm test && pnpm build
+        working-directory: frontend
+      - run: pnpm exec playwright install --with-deps chromium
+        working-directory: frontend
+      - run: pnpm test:e2e tests/e2e/public.spec.ts
+        working-directory: frontend
+      - run: pnpm audit --prod
+        working-directory: frontend

@@ -1,0 +1,375 @@
+[
+  {
+    "id": "synthetic-01",
+    "text": "Synthetic Candidate 01\nsynthetic01@example.org\nSummary\nPython Backend Engineer building maintainable systems.\nSkills\nPython, FastAPI, PostgreSQL, Docker\nExperience\nPython Backend Engineer\nJan 2020 - Jan 2024\nUsed Python, FastAPI, PostgreSQL, Docker to deliver documented project work.\nEducation\nBS Computer Science, Fictional Example University\nProjects\nBuild Python backend REST APIs using FastAPI and PostgreSQL. Package services with Docker and write tests.\nCertifications\nNo certifications documented.",
+    "domain": 0,
+    "tier": 0,
+    "gold_skills": [
+      "Docker",
+      "FastAPI",
+      "PostgreSQL",
+      "Python",
+      "REST APIs"
+    ],
+    "gold_email": "synthetic01@example.org",
+    "relevance": [
+      3,
+      0,
+      1,
+      0,
+      0
+    ]
+  },
+  {
+    "id": "synthetic-02",
+    "text": "Synthetic Candidate 02\nsynthetic02@example.org\nSummary\nPython Backend Engineer building maintainable systems.\nSkills\nPython, FastAPI, PostgreSQL\nExperience\nPython Backend Engineer\nJan 2022 - Jan 2024\nUsed Python, FastAPI, PostgreSQL to deliver documented project work.\nEducation\nBS Computer Science, Fictional Example University\nProjects\nA portfolio project using Python, FastAPI, PostgreSQL\nCertifications\nNo certifications documented.",
+    "domain": 0,
+    "tier": 1,
+    "gold_skills": [
+      "FastAPI",
+      "PostgreSQL",
+      "Python"
+    ],
+    "gold_email": "synthetic02@example.org",
+    "relevance": [
+      2,
+      0,
+      1,
+      0,
+      0
+    ]
+  },
+  {
+    "id": "synthetic-03",
+    "text": "Synthetic Candidate 03\nsynthetic03@example.org\nSummary\nPython Backend Engineer building maintainable systems.\nSkills\nPython, FastAPI\nExperience\nPython Backend Engineer\nJan 2023 - Jan 2024\nUsed Python, FastAPI to deliver documented project work.\nEducation\nBS Computer Science, Fictional Example University\nProjects\nA portfolio project using Python, FastAPI\nCertifications\nNo certifications documented.",
+    "domain": 0,
+    "tier": 2,
+    "gold_skills": [
+      "FastAPI",
+      "Python"
+    ],
+    "gold_email": "synthetic03@example.org",
+    "relevance": [
+      1,
+      0,
+      1,
+      0,
+      0
+    ]
+  },
+  {
+    "id": "synthetic-04",
+    "text": "Synthetic Candidate 04\nsynthetic04@example.org\nSummary\nPython Backend Engineer building maintainable systems.\nSkills\nPython\nExperience\nInternship project; dates not documented.\nEducation\nBS Computer Science, Fictional Example University\nProjects\nA portfolio project using Python\nCertifications\nNo certifications documented.",
+    "domain": 0,
+    "tier": 3,
+    "gold_skills": [
+      "Python"
+    ],
+    "gold_email": "synthetic04@example.org",
+    "relevance": [
+      0,
+      0,
+      1,
+      0,
+      0
+    ]
+  },
+  {
+    "id": "synthetic-05",
+    "text": "Synthetic Candidate 05\nsynthetic05@example.org\nSummary\nReact Frontend Engineer building maintainable systems.\nSkills\nReact, TypeScript, CSS, Playwright\nExperience\nReact Frontend Engineer\nJan 2020 - Jan 2024\nUsed React, TypeScript, CSS, Playwright to deliver documented project work.\nEducation\nBS Computer Science, Fictional Example University\nProjects\nDevelop accessible React interfaces using TypeScript and CSS. Test responsive browser experiences with Playwright.\nCertifications\nNo certifications documented.",
+    "domain": 1,
+    "tier": 0,
+    "gold_skills": [
+      "CSS",
+      "Playwright",
+      "React",
+      "TypeScript"
+    ],
+    "gold_email": "synthetic05@example.org",
+    "relevance": [
+      0,
+      3,
+      0,
+      0,
+      0
+    ]
+  },
+  {
+    "id": "synthetic-06",
+    "text": "Synthetic Candidate 06\nsynthetic06@example.org\nSummary\nReact Frontend Engineer building maintainable systems.\nSkills\nReact, TypeScript, CSS\nExperience\nReact Frontend Engineer\nJan 2022 - Jan 2024\nUsed React, TypeScript, CSS to deliver documented project work.\nEducation\nBS Computer Science, Fictional Example University\nProjects\nA portfolio project using React, TypeScript, CSS\nCertifications\nNo certifications documented.",
+    "domain": 1,
+    "tier": 1,
+    "gold_skills": [
+      "CSS",
+      "React",
+      "TypeScript"
+    ],
+    "gold_email": "synthetic06@example.org",
+    "relevance": [
+      0,
+      2,
+      0,
+      0,
+      0
+    ]
+  },
+  {
+    "id": "synthetic-07",
+    "text": "Synthetic Candidate 07\nsynthetic07@example.org\nSummary\nReact Frontend Engineer building maintainable systems.\nSkills\nReact, TypeScript\nExperience\nReact Frontend Engineer\nJan 2023 - Jan 2024\nUsed React, TypeScript to deliver documented project work.\nEducation\nBS Computer Science, Fictional Example University\nProjects\nA portfolio project using React, TypeScript\nCertifications\nNo certifications documented.",
+    "domain": 1,
+    "tier": 2,
+    "gold_skills": [
+      "React",
+      "TypeScript"
+    ],
+    "gold_email": "synthetic07@example.org",
+    "relevance": [
+      0,
+      1,
+      0,
+      0,
+      0
+    ]
+  },
+  {
+    "id": "synthetic-08",
+    "text": "Synthetic Candidate 08\nsynthetic08@example.org\nSummary\nReact Frontend Engineer building maintainable systems.\nSkills\nReact\nExperience\nInternship project; dates not documented.\nEducation\nBS Computer Science, Fictional Example University\nProjects\nA portfolio project using React\nCertifications\nNo certifications documented.",
+    "domain": 1,
+    "tier": 3,
+    "gold_skills": [
+      "React"
+    ],
+    "gold_email": "synthetic08@example.org",
+    "relevance": [
+      0,
+      0,
+      0,
+      0,
+      0
+    ]
+  },
+  {
+    "id": "synthetic-09",
+    "text": "Synthetic Candidate 09\nsynthetic09@example.org\nSummary\nMachine Learning Engineer building maintainable systems.\nSkills\nPython, PyTorch, Machine Learning, scikit-learn\nExperience\nMachine Learning Engineer\nJan 2020 - Jan 2024\nUsed Python, PyTorch, Machine Learning, scikit-learn to deliver documented project work.\nEducation\nBS Computer Science, Fictional Example University\nProjects\nTrain and evaluate machine learning models with Python, PyTorch and scikit-learn. Build reproducible experiments.\nCertifications\nNo certifications documented.",
+    "domain": 2,
+    "tier": 0,
+    "gold_skills": [
+      "Machine Learning",
+      "PyTorch",
+      "Python",
+      "scikit-learn"
+    ],
+    "gold_email": "synthetic09@example.org",
+    "relevance": [
+      1,
+      0,
+      3,
+      0,
+      0
+    ]
+  },
+  {
+    "id": "synthetic-10",
+    "text": "Synthetic Candidate 10\nsynthetic10@example.org\nSummary\nMachine Learning Engineer building maintainable systems.\nSkills\nPython, PyTorch, Machine Learning\nExperience\nMachine Learning Engineer\nJan 2022 - Jan 2024\nUsed Python, PyTorch, Machine Learning to deliver documented project work.\nEducation\nBS Computer Science, Fictional Example University\nProjects\nA portfolio project using Python, PyTorch, Machine Learning\nCertifications\nNo certifications documented.",
+    "domain": 2,
+    "tier": 1,
+    "gold_skills": [
+      "Machine Learning",
+      "PyTorch",
+      "Python"
+    ],
+    "gold_email": "synthetic10@example.org",
+    "relevance": [
+      1,
+      0,
+      2,
+      0,
+      0
+    ]
+  },
+  {
+    "id": "synthetic-11",
+    "text": "Synthetic Candidate 11\nsynthetic11@example.org\nSummary\nMachine Learning Engineer building maintainable systems.\nSkills\nPython, PyTorch\nExperience\nMachine Learning Engineer\nJan 2023 - Jan 2024\nUsed Python, PyTorch to deliver documented project work.\nEducation\nBS Computer Science, Fictional Example University\nProjects\nA portfolio project using Python, PyTorch\nCertifications\nNo certifications documented.",
+    "domain": 2,
+    "tier": 2,
+    "gold_skills": [
+      "Machine Learning",
+      "PyTorch",
+      "Python"
+    ],
+    "gold_email": "synthetic11@example.org",
+    "relevance": [
+      1,
+      0,
+      1,
+      0,
+      0
+    ]
+  },
+  {
+    "id": "synthetic-12",
+    "text": "Synthetic Candidate 12\nsynthetic12@example.org\nSummary\nMachine Learning Engineer building maintainable systems.\nSkills\nPython\nExperience\nInternship project; dates not documented.\nEducation\nBS Computer Science, Fictional Example University\nProjects\nA portfolio project using Python\nCertifications\nNo certifications documented.",
+    "domain": 2,
+    "tier": 3,
+    "gold_skills": [
+      "Machine Learning",
+      "Python"
+    ],
+    "gold_email": "synthetic12@example.org",
+    "relevance": [
+      1,
+      0,
+      0,
+      0,
+      0
+    ]
+  },
+  {
+    "id": "synthetic-13",
+    "text": "Synthetic Candidate 13\nsynthetic13@example.org\nSummary\nData Analyst building maintainable systems.\nSkills\nSQL, pandas, Tableau, Excel\nExperience\nData Analyst\nJan 2020 - Jan 2024\nUsed SQL, pandas, Tableau, Excel to deliver documented project work.\nEducation\nBS Computer Science, Fictional Example University\nProjects\nAnalyze business data with SQL and pandas. Communicate findings in Tableau dashboards and Excel reports.\nCertifications\nNo certifications documented.",
+    "domain": 3,
+    "tier": 0,
+    "gold_skills": [
+      "Excel",
+      "SQL",
+      "Tableau",
+      "pandas"
+    ],
+    "gold_email": "synthetic13@example.org",
+    "relevance": [
+      0,
+      0,
+      0,
+      3,
+      0
+    ]
+  },
+  {
+    "id": "synthetic-14",
+    "text": "Synthetic Candidate 14\nsynthetic14@example.org\nSummary\nData Analyst building maintainable systems.\nSkills\nSQL, pandas, Tableau\nExperience\nData Analyst\nJan 2022 - Jan 2024\nUsed SQL, pandas, Tableau to deliver documented project work.\nEducation\nBS Computer Science, Fictional Example University\nProjects\nA portfolio project using SQL, pandas, Tableau\nCertifications\nNo certifications documented.",
+    "domain": 3,
+    "tier": 1,
+    "gold_skills": [
+      "SQL",
+      "Tableau",
+      "pandas"
+    ],
+    "gold_email": "synthetic14@example.org",
+    "relevance": [
+      0,
+      0,
+      0,
+      2,
+      0
+    ]
+  },
+  {
+    "id": "synthetic-15",
+    "text": "Synthetic Candidate 15\nsynthetic15@example.org\nSummary\nData Analyst building maintainable systems.\nSkills\nSQL, pandas\nExperience\nData Analyst\nJan 2023 - Jan 2024\nUsed SQL, pandas to deliver documented project work.\nEducation\nBS Computer Science, Fictional Example University\nProjects\nA portfolio project using SQL, pandas\nCertifications\nNo certifications documented.",
+    "domain": 3,
+    "tier": 2,
+    "gold_skills": [
+      "SQL",
+      "pandas"
+    ],
+    "gold_email": "synthetic15@example.org",
+    "relevance": [
+      0,
+      0,
+      0,
+      1,
+      0
+    ]
+  },
+  {
+    "id": "synthetic-16",
+    "text": "Synthetic Candidate 16\nsynthetic16@example.org\nSummary\nData Analyst building maintainable systems.\nSkills\nSQL\nExperience\nInternship project; dates not documented.\nEducation\nBS Computer Science, Fictional Example University\nProjects\nA portfolio project using SQL\nCertifications\nNo certifications documented.",
+    "domain": 3,
+    "tier": 3,
+    "gold_skills": [
+      "SQL"
+    ],
+    "gold_email": "synthetic16@example.org",
+    "relevance": [
+      0,
+      0,
+      0,
+      0,
+      0
+    ]
+  },
+  {
+    "id": "synthetic-17",
+    "text": "Synthetic Candidate 17\nsynthetic17@example.org\nSummary\nDevOps Engineer building maintainable systems.\nSkills\nDocker, Kubernetes, AWS, Terraform\nExperience\nDevOps Engineer\nJan 2020 - Jan 2024\nUsed Docker, Kubernetes, AWS, Terraform to deliver documented project work.\nEducation\nBS Computer Science, Fictional Example University\nProjects\nOperate container services with Docker and Kubernetes. Manage AWS infrastructure using Terraform.\nCertifications\nNo certifications documented.",
+    "domain": 4,
+    "tier": 0,
+    "gold_skills": [
+      "AWS",
+      "Docker",
+      "Kubernetes",
+      "Terraform"
+    ],
+    "gold_email": "synthetic17@example.org",
+    "relevance": [
+      0,
+      0,
+      0,
+      0,
+      3
+    ]
+  },
+  {
+    "id": "synthetic-18",
+    "text": "Synthetic Candidate 18\nsynthetic18@example.org\nSummary\nDevOps Engineer building maintainable systems.\nSkills\nDocker, Kubernetes, AWS\nExperience\nDevOps Engineer\nJan 2022 - Jan 2024\nUsed Docker, Kubernetes, AWS to deliver documented project work.\nEducation\nBS Computer Science, Fictional Example University\nProjects\nA portfolio project using Docker, Kubernetes, AWS\nCertifications\nNo certifications documented.",
+    "domain": 4,
+    "tier": 1,
+    "gold_skills": [
+      "AWS",
+      "Docker",
+      "Kubernetes"
+    ],
+    "gold_email": "synthetic18@example.org",
+    "relevance": [
+      0,
+      0,
+      0,
+      0,
+      2
+    ]
+  },
+  {
+    "id": "synthetic-19",
+    "text": "Synthetic Candidate 19\nsynthetic19@example.org\nSummary\nDevOps Engineer building maintainable systems.\nSkills\nDocker, Kubernetes\nExperience\nDevOps Engineer\nJan 2023 - Jan 2024\nUsed Docker, Kubernetes to deliver documented project work.\nEducation\nBS Computer Science, Fictional Example University\nProjects\nA portfolio project using Docker, Kubernetes\nCertifications\nNo certifications documented.",
+    "domain": 4,
+    "tier": 2,
+    "gold_skills": [
+      "Docker",
+      "Kubernetes"
+    ],
+    "gold_email": "synthetic19@example.org",
+    "relevance": [
+      0,
+      0,
+      0,
+      0,
+      1
+    ]
+  },
+  {
+    "id": "synthetic-20",
+    "text": "Synthetic Candidate 20\nsynthetic20@example.org\nSummary\nDevOps Engineer building maintainable systems.\nSkills\nDocker\nExperience\nInternship project; dates not documented.\nEducation\nBS Computer Science, Fictional Example University\nProjects\nA portfolio project using Docker\nCertifications\nNo certifications documented.",
+    "domain": 4,
+    "tier": 3,
+    "gold_skills": [
+      "Docker"
+    ],
+    "gold_email": "synthetic20@example.org",
+    "relevance": [
+      0,
+      0,
+      0,
+      0,
+      0
+    ]
+  }
+]

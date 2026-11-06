@@ -1,0 +1,28 @@
+[project]
+name = "talentlens-api"
+version = "0.1.0"
+requires-python = ">=3.11,<3.13"
+dependencies = [
+  "fastapi>=0.115,<1", "uvicorn[standard]>=0.34,<1", "pydantic-settings>=2.7,<3",
+  "sqlalchemy>=2.0.36,<2.1", "alembic>=1.14,<2", "psycopg[binary]>=3.2,<4",
+  "pgvector>=0.3.6,<1", "argon2-cffi>=23.1", "python-multipart>=0.0.20",
+  "email-validator>=2.2", "celery[redis]>=5.4,<6", "redis>=5,<7",
+  "pymupdf>=1.25,<2", "python-docx>=1.1,<2", "spacy>=3.8,<3.9",
+  "sentence-transformers>=3.4,<6", "numpy>=1.26,<3", "boto3>=1.35,<2",
+  "reportlab>=4.2,<5", "httpx>=0.28,<1"
+]
+[project.optional-dependencies]
+dev = ["pytest>=8,<10", "ruff>=0.9", "pip-audit>=2.7", "scikit-learn>=1.6", "pandas>=2.2"]
+[build-system]
+requires = ["setuptools>=75"]
+build-backend = "setuptools.build_meta"
+[tool.setuptools.packages.find]
+include = ["app*"]
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+markers = ["integration: requires PostgreSQL", "models: downloads and executes NLP models"]
+[tool.ruff]
+line-length = 110
+[tool.ruff.lint]
+select = ["E", "F", "I", "B"]
+ignore = ["E501", "B008"]

@@ -1,0 +1,38 @@
+name: Full model and journey validation
+on: workflow_dispatch
+permissions:
+  contents: read
+jobs:
+  pipeline:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - run: cp .env.example .env
+      - run: docker compose up -d --build --wait
+        env: {INSTALL_DEV: 'true'}
+      - run: docker compose exec -T worker python -m scripts.warm_models
+      - run: docker compose exec -T -e RUN_MODEL_TESTS=1 api python -m pytest -q -m models
+      - uses: pnpm/action-setup@v4
+        with: {version: 11.25.0}
+      - uses: actions/setup-node@v4
+        with: {node-version: '22'}
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - run: pip install pymupdf python-docx && python scripts/generate-demo.py
+      - run: pnpm install --frozen-lockfile && pnpm exec playwright install --with-deps chromium
+        working-directory: frontend
+      - run: pnpm test:e2e
+        working-directory: frontend
+        env: {RUN_FULL_E2E: '1', E2E_EXTERNAL: '1'}
+      - if: always()
+        run: docker compose logs --no-color > compose-test.log
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: validation-artifacts
+          path: |
+            compose-test.log
+            frontend/test-results/
+      - if: always()
+        run: docker compose down -v
