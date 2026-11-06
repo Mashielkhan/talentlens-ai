@@ -2,11 +2,13 @@
 
 **AI-Powered Resume Analyzer & Job Matcher · Mashiel Khan**
 
+[Public repository](https://github.com/Mashielkhan/talentlens-ai) · [Quality checks](https://github.com/Mashielkhan/talentlens-ai/actions/workflows/ci.yml)
+
 A full-stack portfolio application that turns private PDF/DOCX resumes into editable qualification profiles and compares them with recruiter-confirmed job criteria. Applicants control sharing; recruiters inspect evidence and make their own decisions.
 
 **Status:** implemented application source with automated tests and deployment configuration. See [the implementation record](docs/implementation-status.md) for checks actually executed and remaining work. Do not interpret source coverage as production verification. No hosted demo has been deployed.
 
-**Verification — November 6, 2026:** 34 backend and 4 frontend unit tests pass. Ruff, ESLint, TypeScript and the Webpack production build pass. Docker integration validation is now in progress following owner review; pretrained model inference and browser journeys remain unverified.
+**Verification — November 6, 2026:** 38 backend tests (34 unit/API + 3 PostgreSQL integration + 1 real-model test), 4 frontend unit tests and 2 browser tests pass across the quality and full-validation workflows. The full Docker journey covers resume processing, private analysis, consent, recruiter matching, PDF download and deletion. Lint, TypeScript, production builds and dependency audits pass. This is a development checkpoint, not a production-readiness or hiring-validity claim.
 
 ## What it does
 

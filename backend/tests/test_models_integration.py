@@ -36,7 +36,13 @@ def test_vector_retrieval_filters_consent_and_model_before_limit(pg_db):
         password_hash="test-only",
         role="APPLICANT",
     )
-    pg_db.add_all([recruiter, applicant])
+    stale_applicant = User(
+        email="pg-stale@example.org",
+        full_name="Synthetic Stale Applicant",
+        password_hash="test-only",
+        role="APPLICANT",
+    )
+    pg_db.add_all([recruiter, applicant, stale_applicant])
     pg_db.flush()
     job = Job(
         recruiter_id=recruiter.id,
@@ -51,7 +57,7 @@ def test_vector_retrieval_filters_consent_and_model_before_limit(pg_db):
     resumes = []
     for i in range(3):
         resume = Resume(
-            owner_id=applicant.id,
+            owner_id=stale_applicant.id if i == 2 else applicant.id,
             original_filename=f"synthetic-{i}.pdf",
             storage_key=f"integration-{i}.pdf",
             mime_type="application/pdf",
@@ -76,6 +82,7 @@ def test_vector_retrieval_filters_consent_and_model_before_limit(pg_db):
     # consented, current-model applicant when retrieval is limited to one.
     application = Application(job_id=job.id, applicant_id=applicant.id, resume_id=resumes[1].id)
     pg_db.add(application)
+    pg_db.add(Application(job_id=job.id, applicant_id=stale_applicant.id, resume_id=resumes[2].id))
     pg_db.flush()
     retrieved = authorized_retrieval(pg_db, job, [[1.0] + [0.0] * 383], limit=1)
     assert [item.id for item in retrieved] == [application.id]
