@@ -10,8 +10,9 @@
 - Protected data exclusion is best effort. No independently measured fairness or validity for employment decisions. Never automate rejection.
 - Exact vector retrieval uses the first job chunk for a top-100 shortlist; full hybrid scoring uses all stored chunks. Large-pool retrieval performance is not benchmarked.
 - Cross-encoder is available only in offline evaluation, not promoted to live ranking without evidence.
-- No email verification/password reset delivery provider configured. No public read-only demo isolation layer. Local synthetic demo accounts are writable.
-- S3 needs credentials, bucket policy and integration validation. No antivirus/CDR integration. Worker hard resource constraints and ingress controls require deployment validation.
+- Email verification/password reset flows are implemented; no delivery provider is configured yet. Mail delivery runs as an API background task, without a durable outbox. No public read-only demo isolation layer. Local synthetic demo accounts are writable.
+- S3 needs credentials, bucket policy and integration validation. ClamAV streaming is implemented but actual scanner/signature availability needs deployment verification. No CDR integration. The beta profile adds worker limits and ingress controls; public-host validation remains required.
+- CV Studio offers conservative wording edits and manual tailoring, not a generative rewrite or independent fact verification. PDF supports the bundled font's character set; unsupported glyphs require DOCX export. DOCX content is tested but local visual rendering is unavailable without an office renderer.
 - Lists have bounded limits; frontend pagination for datasets beyond those initial limits remains to be added. Analytics use application queries and should be optimized for larger datasets.
 - Task progress is coarse queue/processing/completed state, not a fine-grained percent estimate. Automatic retry is bounded; API UI supports explicit reprocessing.
 - No 100/1,000-resume performance claims, screenshots of invented scores, or fabricated evaluation metrics.

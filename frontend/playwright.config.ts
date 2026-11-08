@@ -4,6 +4,7 @@ export default defineConfig({
   timeout: 600000,
   expect: { timeout: 15000 },
   use: {
+    actionTimeout: 30000,
     baseURL: process.env.E2E_BASE_URL || "http://localhost:3000",
     trace: "retain-on-failure",
     launchOptions: process.env.PLAYWRIGHT_CHROME_PATH

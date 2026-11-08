@@ -28,7 +28,14 @@ def db():
 @pytest.fixture
 def client(db, monkeypatch, tmp_path):
     app.dependency_overrides[get_db] = lambda: db
-    for module in ["app.api.auth", "app.api.resumes", "app.api.matching"]:
+    for module in [
+        "app.api.auth",
+        "app.api.resumes",
+        "app.api.matching",
+        "app.api.studio",
+        "app.api.account_access",
+        "app.api.feedback",
+    ]:
         monkeypatch.setattr(module + ".rate_limit", lambda *a, **k: None)
     monkeypatch.setattr(settings(), "storage_path", tmp_path)
     storage.cache_clear()

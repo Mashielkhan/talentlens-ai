@@ -88,6 +88,8 @@ def require_role(role):
     def dependency(user=Depends(current_user)):
         if user.role != role:
             raise HTTPException(403, "This action is unavailable for your account role")
+        if settings().require_email_verification and not user.email_verified:
+            raise HTTPException(403, "Verify your email in Account access before using this feature")
         return user
 
     return dependency

@@ -171,3 +171,32 @@ class Deletion(Identity, Base):
 
     __tablename__ = "storage_deletions"
     storage_key: Mapped[str] = mapped_column(String(255), unique=True)
+
+
+class CvDraft(Identity, Base):
+    __tablename__ = "cv_drafts"
+    owner_id: Mapped[uuid.UUID] = mapped_column(ForeignKey("users.id", ondelete="CASCADE"), index=True)
+    resume_id: Mapped[uuid.UUID] = mapped_column(ForeignKey("resumes.id", ondelete="CASCADE"), index=True)
+    source_version: Mapped[int] = mapped_column(Integer)
+    title: Mapped[str] = mapped_column(String(160))
+    target_description: Mapped[str] = mapped_column(Text)
+    original: Mapped[dict] = mapped_column(JSONType)
+    content: Mapped[dict] = mapped_column(JSONType)
+    guidance: Mapped[dict] = mapped_column(JSONType)
+    revision: Mapped[int] = mapped_column(Integer, default=1)
+    approved_revision: Mapped[int | None] = mapped_column(Integer)
+
+
+class AccountToken(Identity, Base):
+    __tablename__ = "account_tokens"
+    user_id: Mapped[uuid.UUID] = mapped_column(ForeignKey("users.id", ondelete="CASCADE"), index=True)
+    purpose: Mapped[str] = mapped_column(String(20))
+    token_hash: Mapped[str] = mapped_column(String(64), unique=True)
+    expires_at: Mapped[datetime] = mapped_column(DateTime(timezone=True))
+
+
+class Feedback(Identity, Base):
+    __tablename__ = "beta_feedback"
+    user_id: Mapped[uuid.UUID] = mapped_column(ForeignKey("users.id", ondelete="CASCADE"), index=True)
+    category: Mapped[str] = mapped_column(String(20))
+    message: Mapped[str] = mapped_column(Text)

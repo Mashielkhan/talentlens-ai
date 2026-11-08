@@ -85,6 +85,11 @@ export default function ResumePage({ params }: { params: Promise<{ id: string }>
                 Reprocess
               </Button>
               {r.status === "COMPLETED" && (
+                <Button asChild>
+                  <Link href="/studio">Improve in CV Studio</Link>
+                </Button>
+              )}
+              {r.status === "COMPLETED" && (
                 <Button variant="outline" onClick={() => setEditing(!editing)}>
                   <Pencil size={14} />
                   {editing ? "Cancel editing" : "Correct extraction"}

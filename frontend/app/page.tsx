@@ -113,8 +113,8 @@ export default function Home() {
               ],
               [
                 "03",
-                "Move forward with clarity",
-                "Get an evidence-based skill gap report. Apply with explicit consent, or keep your analysis completely private.",
+                "Shape your next CV",
+                "Paste a job description in CV Studio. Review suggestions, edit your own facts, and approve a private PDF or DOCX export.",
               ],
             ].map(([n, title, text]) => (
               <article key={n} className="panel">
@@ -134,6 +134,9 @@ export default function Home() {
       </main>
       <footer className="landing-footer">
         TalentLens AI · Designed and built for a clearer view of qualifications · Mashiel Khan
+        <Link className="text-link ml-4" href="/privacy">
+          Beta privacy and use
+        </Link>
       </footer>
     </div>
   );

@@ -9,7 +9,18 @@ from fastapi.responses import JSONResponse
 from redis import Redis
 from sqlalchemy import text
 
-from app.api import analytics, applications, auth, jobs, matching, reports, resumes
+from app.api import (
+    account_access,
+    analytics,
+    applications,
+    auth,
+    feedback,
+    jobs,
+    matching,
+    reports,
+    resumes,
+    studio,
+)
 from app.core.config import settings
 from app.db.session import engine
 
@@ -105,6 +116,9 @@ async def internal_error(request: Request, exc: Exception):
 
 for router in [
     auth.router,
+    account_access.router,
+    studio.router,
+    feedback.router,
     resumes.router,
     jobs.router,
     applications.router,

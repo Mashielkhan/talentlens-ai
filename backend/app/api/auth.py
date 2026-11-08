@@ -4,7 +4,7 @@ from sqlalchemy.exc import IntegrityError
 
 from app.core.security import DUMMY_HASH, current_user, hasher, issue_session, rate_limit, verify_password
 from app.db.session import get_db
-from app.models.entities import AuditLog, Deletion, Resume, Session, User
+from app.models.entities import AccountToken, AuditLog, Deletion, Resume, Session, User
 from app.schemas.contracts import Login, PasswordUpdate, ProfileUpdate, Register, UserOut
 
 router = APIRouter(prefix="/auth", tags=["Authentication"])
@@ -74,10 +74,14 @@ def update_profile(data: ProfileUpdate, user=Depends(current_user), db=Depends(g
 
 @router.post("/password", status_code=204)
 def password(data: PasswordUpdate, response: Response, user=Depends(current_user), db=Depends(get_db)):
+    user = db.scalar(
+        select(User).where(User.id == user.id).with_for_update().execution_options(populate_existing=True)
+    )
     if not verify_password(user.password_hash, data.current_password):
         raise HTTPException(400, "Current password is incorrect")
     user.password_hash = hasher.hash(data.new_password)
     db.execute(delete(Session).where(Session.user_id == user.id))
+    db.execute(delete(AccountToken).where(AccountToken.user_id == user.id, AccountToken.purpose == "reset"))
     issue_session(db, user, response)
 
 

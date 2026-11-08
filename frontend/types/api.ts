@@ -4,6 +4,47 @@ export type User = {
   email: string;
   role: "APPLICANT" | "RECRUITER";
   profile: Record<string, string>;
+  email_verified: boolean;
+};
+
+export type CvContent = Record<
+  | "name"
+  | "email"
+  | "phone"
+  | "links"
+  | "summary"
+  | "skills"
+  | "experience"
+  | "education"
+  | "projects"
+  | "certifications",
+  string
+>;
+export type CvDraft = {
+  id: string;
+  resume_id: string;
+  source_version: number;
+  source_outdated: boolean;
+  title: string;
+  target_description: string;
+  original: CvContent;
+  content: CvContent;
+  revision: number;
+  approved_revision: number | null;
+  created_at: string;
+  guidance: {
+    method: string;
+    prompts: string[];
+    documented_target_skills: string[];
+    not_documented_target_skills: string[];
+    suggestions: {
+      id: number;
+      section: keyof CvContent;
+      original: string;
+      replacement: string;
+      reason: string;
+    }[];
+  };
 };
 export type Skill = {
   name: string;

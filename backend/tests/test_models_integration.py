@@ -12,7 +12,7 @@ from app.services.processing import authorized_retrieval
 
 @pytest.mark.integration
 def test_postgres_migration_vector_and_fts(pg_db):
-    assert pg_db.scalar(text("SELECT version_num FROM alembic_version")) == "0001"
+    assert pg_db.scalar(text("SELECT version_num FROM alembic_version")) == "0002"
     assert pg_db.scalar(text("SELECT '[1,0,0]'::vector <=> '[1,0,0]'::vector")) == 0
     assert pg_db.scalar(
         text(

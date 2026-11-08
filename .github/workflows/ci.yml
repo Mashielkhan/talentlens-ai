@@ -30,6 +30,8 @@ jobs:
       - run: pip install --upgrade 'setuptools>=84.1.0'
       - run: pip install -e './backend[dev]'
       - run: ruff check backend scripts ml
+      - run: docker compose --env-file .env.example -f compose.yaml -f compose.beta.yaml config --no-env-resolution --quiet
+        env: {PUBLIC_ORIGIN: 'https://beta.example.invalid', SITE_DOMAIN: 'beta.example.invalid'}
       - run: alembic upgrade head
         working-directory: backend
       - run: pytest -q -m 'not models'

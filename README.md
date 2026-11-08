@@ -2,13 +2,15 @@
 
 **AI-Powered Resume Analyzer & Job Matcher · Mashiel Khan**
 
+**Applicant beta:** CV Studio adds private job-tailored drafts, reviewable wording suggestions, factual approval, and PDF/DOCX CV exports. Account verification/recovery and feedback are implemented with configurable email delivery. See the [beta plan](docs/public-beta-plan.md), [verification record](docs/public-beta-verification.md) and [launch runbook](docs/public-beta-launch.md). Public hosting and email accounts still need to be connected; this repository is not a live public service.
+
 [Public repository](https://github.com/Mashielkhan/talentlens-ai) · [Quality checks](https://github.com/Mashielkhan/talentlens-ai/actions/workflows/ci.yml)
 
 A full-stack portfolio application that turns private PDF/DOCX resumes into editable qualification profiles and compares them with recruiter-confirmed job criteria. Applicants control sharing; recruiters inspect evidence and make their own decisions.
 
 **Status:** implemented application source with automated tests and deployment configuration. See [the implementation record](docs/implementation-status.md) for checks actually executed and remaining work. Do not interpret source coverage as production verification. No hosted demo has been deployed.
 
-**Verification — November 6, 2026:** 38 backend tests (34 unit/API + 3 PostgreSQL integration + 1 real-model test), 4 frontend unit tests and 2 browser tests pass across the quality and full-validation workflows. The full Docker journey covers resume processing, private analysis, consent, recruiter matching, PDF download and deletion. Lint, TypeScript, production builds and dependency audits pass. This is a development checkpoint, not a production-readiness or hiring-validity claim.
+**Verification — November 8, 2026:** 53 backend tests (49 unit/API + 3 PostgreSQL integration + 1 real-model test), 6 frontend unit tests and 2 browser tests passed locally. The Docker browser journey covers resume processing, private analysis, consent, recruiter matching, CV editing/approval, PDF/DOCX downloads, feedback and deletion. Lint, TypeScript and production builds passed. See the [beta verification record](docs/public-beta-verification.md) for evidence and unverified deployment dependencies. This is a development checkpoint, not a production-readiness or hiring-validity claim.
 
 ## What it does
 
@@ -19,6 +21,8 @@ A full-stack portfolio application that turns private PDF/DOCX resumes into edit
 - Consent-based applications and withdrawal. Uploading or privately analyzing a resume does **not** make it recruiter-searchable.
 - CPU Sentence Transformers, token-aware section chunks, PostgreSQL pgvector storage, exact retrieval over authorized applications, explainable hybrid scoring.
 - Deterministic skill gaps and learning suggestions, PDF reports, candidate comparison, and analytics derived from persisted records.
+- Private CV Studio drafts from a pasted job description, source-linked editing suggestions, versioned approval and CV PDF/DOCX export. Missing skills are guidance; the app does not invent achievements or silently add qualifications.
+- Single-use email verification and password recovery, session revocation after reset, private beta feedback, and a production profile with HTTPS and fail-closed ClamAV scanning.
 - Responsive Next.js interface with loading, empty, failure and progress states. No invented candidate rankings or dashboard metrics.
 
 ## Architecture

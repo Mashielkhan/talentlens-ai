@@ -34,6 +34,7 @@ class UserOut(DTO):
     email: str
     role: str
     profile: dict
+    email_verified: bool
 
 
 class ProfileUpdate(DTO):

@@ -12,6 +12,7 @@ from app.models.entities import AuditLog, Deletion, MatchResult, ProcessingTask,
 from app.nlp.documents import DocumentError, validate_file
 from app.repositories.access import own_resume, visible_resume
 from app.schemas.contracts import Correction, ResumeOut, TaskOut
+from app.services.upload_scan import scan_upload
 from app.storage.private import storage
 
 router = APIRouter(prefix="/resumes", tags=["Private resumes"])
@@ -36,6 +37,7 @@ def upload(file: UploadFile, user=Depends(applicant), db=Depends(get_db)):
         suffix = validate_file(data, file.filename or "", file.content_type or "")
     except DocumentError as exc:
         raise HTTPException(422, str(exc)) from exc
+    scan_upload(data)
     resume = Resume(
         id=uuid.uuid4(),
         owner_id=user.id,

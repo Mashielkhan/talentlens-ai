@@ -156,6 +156,20 @@ export function AuthForm({ mode }: { mode: "login" | "register" }) {
               <ArrowRight size={15} />
             </Button>
           </form>
+          {!registerMode && (
+            <Link className="text-link mt-5 inline-block" href="/forgot-password">
+              Forgot your password?
+            </Link>
+          )}
+          {registerMode && (
+            <p className="muted text-xs mt-5">
+              Public beta: review our{" "}
+              <Link className="text-link" href="/privacy">
+                privacy and use information
+              </Link>{" "}
+              before uploading personal documents.
+            </p>
+          )}
           <p className="muted text-xs mt-6">
             {registerMode ? "Already have an account?" : "New to TalentLens?"}{" "}
             <Link className="text-link" href={registerMode ? "/login" : "/register"}>

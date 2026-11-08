@@ -1,5 +1,7 @@
 # Implementation status
 
+**November 8 applicant-beta work:** see [public-beta-verification.md](public-beta-verification.md) for the new CV Studio, account access and deployment checks. The November 6 checkpoint below is retained as historical validation.
+
 This file distinguishes implemented source from executed verification. Checkpoint recorded on November 6, 2026. The owner authorized continued Docker integration validation and public GitHub publication after the unit-test checkpoint.
 
 ## Review checkpoint

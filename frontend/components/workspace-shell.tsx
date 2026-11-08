@@ -28,6 +28,10 @@ export function WorkspaceShell({ children }: { children: React.ReactNode }) {
     queryKey: ["health"],
     queryFn: () => api<{ demo_mode: boolean }>("/health"),
   });
+  const { data: accessConfig } = useQuery({
+    queryKey: ["auth-config"],
+    queryFn: () => api<{ verification_required: boolean }>("/auth/config"),
+  });
   const router = useRouter(),
     path = usePathname(),
     cache = useQueryClient();
@@ -55,9 +59,12 @@ export function WorkspaceShell({ children }: { children: React.ReactNode }) {
   const links = [
     { href: "/dashboard", label: "Overview", icon: LayoutDashboard },
     ...(!recruiter ? [{ href: "/resumes", label: "My resumes", icon: FileText }] : []),
+    ...(!recruiter ? [{ href: "/studio", label: "CV Studio", icon: FileText }] : []),
     { href: "/jobs", label: recruiter ? "Job management" : "Explore jobs", icon: BriefcaseBusiness },
     { href: "/matches", label: recruiter ? "Candidate matching" : "My analyses", icon: ScanLine },
     { href: "/applications", label: "Applications", icon: Users },
+    { href: "/account-access", label: "Account access", icon: ShieldCheck },
+    { href: "/feedback", label: "Beta feedback", icon: Users },
   ];
   const active = links.find((link) => path.startsWith(link.href))?.label || "Settings";
   async function logout() {
@@ -165,6 +172,14 @@ export function WorkspaceShell({ children }: { children: React.ReactNode }) {
             </div>
           )}
           <ErrorBox error={actionError} />
+          {accessConfig?.verification_required && !user.email_verified && (
+            <div className="notice mb-5">
+              Verify your email to use beta features.{" "}
+              <Link href="/account-access" className="text-link">
+                Open Account access
+              </Link>
+            </div>
+          )}
           {children}
         </main>
       </div>

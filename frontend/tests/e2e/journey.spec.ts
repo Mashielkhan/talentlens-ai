@@ -63,6 +63,48 @@ test("real applicant and recruiter journey", async ({ browser }) => {
   const download = applicant.waitForEvent("download");
   await applicant.getByRole("link", { name: "Download PDF" }).click();
   expect((await download).suggestedFilename()).toMatch(/\.pdf$/);
+  await applicant.goto("/studio");
+  await applicant.getByLabel("Processed resume").selectOption({ index: 1 });
+  await applicant.getByLabel("Draft title").fill("Synthetic beta CV");
+  await applicant
+    .getByLabel("Target job description")
+    .fill("Build Python backend REST APIs using FastAPI and PostgreSQL with Docker containers.");
+  await applicant.getByRole("button", { name: "Create CV draft" }).click();
+  await expect(applicant).toHaveURL(/\/studio\/[a-f0-9-]+$/);
+  await applicant.getByLabel("Full name", { exact: true }).fill("Synthetic Beta Applicant");
+  await applicant
+    .getByLabel("Summary", { exact: true })
+    .fill("Python developer with documented FastAPI and PostgreSQL project experience.");
+  await applicant.getByRole("button", { name: "Save draft", exact: true }).click();
+  await expect(applicant.getByText(/Revision 2 ·/)).toBeVisible();
+  await expect(applicant.getByRole("button", { name: "Save draft", exact: true })).toBeDisabled();
+  await applicant.reload();
+  await expect(applicant.getByLabel("Full name", { exact: true })).toHaveValue("Synthetic Beta Applicant");
+  await applicant.getByLabel(/I reviewed this saved revision/).check();
+  await applicant.getByRole("button", { name: "Approve this revision" }).click();
+  for (const format of ["PDF", "DOCX"]) {
+    const exported = applicant.waitForEvent("download");
+    await applicant.getByRole("link", { name: `Download CV ${format}`, exact: true }).click();
+    const file = await exported;
+    expect(file.suggestedFilename()).toBe(`talentlens-cv.${format.toLowerCase()}`);
+    expect(await file.failure()).toBeNull();
+  }
+  await applicant.getByLabel("Summary", { exact: true }).fill("An updated summary awaiting factual review.");
+  await expect(applicant.getByRole("link", { name: "Download CV PDF", exact: true })).toHaveCount(0);
+  await applicant.getByRole("button", { name: "Save draft", exact: true }).click();
+  await expect(applicant.getByText(/Revision 3 ·/)).toBeVisible();
+  await expect(applicant.getByRole("button", { name: "Save draft", exact: true })).toBeDisabled();
+  await applicant.reload();
+  await expect(applicant.getByRole("link", { name: "Download CV PDF", exact: true })).toHaveCount(0);
+  applicant.once("dialog", (dialog) => dialog.accept());
+  await applicant.getByRole("button", { name: "Delete draft", exact: true }).click();
+  await expect(applicant).toHaveURL(/\/studio$/);
+  await applicant.goto("/feedback");
+  await applicant
+    .getByLabel("Your feedback")
+    .fill("Synthetic browser check: CV Studio export completed successfully.");
+  await applicant.getByRole("button", { name: "Send feedback" }).click();
+  await expect(applicant.getByRole("status")).toContainText("feedback has been saved");
   await applicant.goto("/resumes");
   await applicant.getByRole("link", { name: /Review synthetic-01/ }).click();
   applicant.once("dialog", (dialog) => dialog.accept());

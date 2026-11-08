@@ -1,0 +1,55 @@
+# Use with --env-file .env.beta -f compose.yaml -f compose.beta.yaml.
+# Requires Docker Compose >= 2.24.4 for !override / !reset.
+name: talentlens-beta
+x-beta: &beta
+  env_file: !override [.env.beta]
+  environment:
+    ENVIRONMENT: production
+    APP_ORIGIN: ${PUBLIC_ORIGIN:?Set PUBLIC_ORIGIN to your HTTPS URL}
+    COOKIE_SECURE: "true"
+    REQUIRE_EMAIL_VERIFICATION: "true"
+    UPLOAD_SCANNING: clamav
+  restart: unless-stopped
+services:
+  db:
+    ports: !reset []
+    restart: unless-stopped
+  redis:
+    ports: !reset []
+    restart: unless-stopped
+  migrate:
+    <<: *beta
+    restart: "no"
+  api:
+    <<: *beta
+    ports: !reset []
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --no-access-log --proxy-headers --forwarded-allow-ips=*
+  worker:
+    <<: *beta
+    mem_limit: 2g
+    cpus: 2
+  beat:
+    <<: *beta
+  frontend:
+    ports: !reset []
+    restart: unless-stopped
+  clamav:
+    image: clamav/clamav:stable
+    volumes: [clamav-signatures:/var/lib/clamav]
+    restart: unless-stopped
+    mem_limit: 2g
+  proxy:
+    image: caddy:2-alpine
+    ports: ["80:80", "443:443", "443:443/udp"]
+    environment:
+      SITE_DOMAIN: ${SITE_DOMAIN:?Set the hostname resolving to this server}
+    volumes:
+      - ./deploy/Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy-data:/data
+      - caddy-config:/config
+    depends_on: [frontend, api]
+    restart: unless-stopped
+volumes:
+  clamav-signatures:
+  caddy-data:
+  caddy-config:
