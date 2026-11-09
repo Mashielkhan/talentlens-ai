@@ -2,6 +2,14 @@
 
 Recorded November 8, 2026. Implementation follows `public-beta-plan.md`.
 
+## Product regression check — November 9, 2026
+
+- Reproduced a failed profile save clearing edited fields. Replaced automatic form actions with explicit submit handlers in Settings, job editing and resume corrections so API failures preserve input. Password fields clear only after a successful password change.
+- Corrected textarea and authentication-error label associations, made the fixed sidebar scrollable on short screens, and replaced obsolete Settings recovery guidance with the Account access link.
+- All 3 browser scenarios passed against the rebuilt production frontend (public and full applicant/recruiter scenarios together, then the account scenario after disambiguating its navigation selector). Coverage includes API failure/retry, real recruiter validation, persistent profile edits, password change and old-password rejection, mobile sign-out, account deletion, correction/reprocessing and stale CV draft protection. Account and applicant/recruiter scenarios reported no uncaught page errors.
+- Backend: 53 passed, including isolated PostgreSQL and the cached real model. Frontend: 6 unit tests passed. ESLint, TypeScript and the production Docker frontend build passed.
+- Tests use synthetic accounts/documents. External email, public HTTPS and live ClamAV remain outside this local check.
+
 ## Implemented
 
 - Owner-only CV Studio drafts; job description stays private; source evidence and conservative wording suggestions; explicit saved-revision approval; PDF and editable DOCX exports.

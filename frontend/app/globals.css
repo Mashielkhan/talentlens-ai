@@ -299,6 +299,7 @@ input[type="checkbox"] {
   color: #7564df;
 }
 .sidebar {
+  overflow-y: auto;
   position: fixed;
   inset: 0 auto 0 0;
   width: 236px;
@@ -308,6 +309,9 @@ input[type="checkbox"] {
   display: flex;
   flex-direction: column;
   z-index: 20;
+}
+.sidebar > * {
+  flex-shrink: 0;
 }
 .sidebar .brand {
   padding: 0 10px;

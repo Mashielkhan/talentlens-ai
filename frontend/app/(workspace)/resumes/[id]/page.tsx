@@ -132,7 +132,13 @@ export default function ResumePage({ params }: { params: Promise<{ id: string }>
           </section>
         )}
         {editing ? (
-          <form action={save} className="panel stack">
+          <form
+            onSubmit={(event) => {
+              event.preventDefault();
+              save(new FormData(event.currentTarget));
+            }}
+            className="panel stack"
+          >
             <h2>Review and correct your profile</h2>
             <p className="muted text-xs">
               Corrections are labeled applicant-confirmed. Saving reprocesses your profile and invalidates
@@ -150,10 +156,15 @@ export default function ResumePage({ params }: { params: Promise<{ id: string }>
                 <input name="skills" defaultValue={p.skills?.map((s) => s.name).join(", ")} />
               </label>
               {["summary", "experience", "education", "projects", "certifications"].map((section) => (
-                <label key={section} className="field full">
-                  {section}
-                  <textarea name={section} defaultValue={p.sections?.[section] || ""} maxLength={20000} />
-                </label>
+                <div key={section} className="field full">
+                  <label htmlFor={`resume-${section}`}>{section}</label>
+                  <textarea
+                    id={`resume-${section}`}
+                    name={section}
+                    defaultValue={p.sections?.[section] || ""}
+                    maxLength={20000}
+                  />
+                </div>
               ))}
             </div>
             <Button disabled={action.isPending} type="submit">

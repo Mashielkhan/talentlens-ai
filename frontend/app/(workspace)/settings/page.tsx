@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { api, send } from "@/lib/api";
@@ -13,6 +14,7 @@ export default function Page() {
   const action = useMutation({
     mutationFn: ({ path, method, body }: { path: string; method: string; body: unknown }) =>
       api(`/auth/${path}`, send(method, body)),
+    onMutate: () => setMessage(""),
     onSuccess: (_, vars) => {
       if (vars.path === "account") {
         cache.clear();
@@ -36,9 +38,14 @@ export default function Page() {
         )}
         <form
           className="panel stack"
-          action={(form) =>
-            action.mutate({ path: "profile", method: "PATCH", body: Object.fromEntries(form) })
-          }
+          onSubmit={(event) => {
+            event.preventDefault();
+            action.mutate({
+              path: "profile",
+              method: "PATCH",
+              body: Object.fromEntries(new FormData(event.currentTarget)),
+            });
+          }}
         >
           <h2>Profile</h2>
           <div className="form-grid">
@@ -52,10 +59,10 @@ export default function Page() {
                 <input name={key} defaultValue={user.profile[key] || ""} maxLength={160} />
               </label>
             ))}
-            <label className="field full">
-              About you
-              <textarea name="bio" defaultValue={user.profile.bio || ""} maxLength={2000} />
-            </label>
+            <div className="field full">
+              <label htmlFor="profile-bio">About you</label>
+              <textarea id="profile-bio" name="bio" defaultValue={user.profile.bio || ""} maxLength={2000} />
+            </div>
           </div>
           <div>
             <Button disabled={action.isPending}>Save profile</Button>
@@ -63,9 +70,16 @@ export default function Page() {
         </form>
         <form
           className="panel stack"
-          action={(form) =>
-            action.mutate({ path: "password", method: "POST", body: Object.fromEntries(form) })
-          }
+          onSubmit={(event) => {
+            event.preventDefault();
+            const form = event.currentTarget;
+            action.mutate(
+              { path: "password", method: "POST", body: Object.fromEntries(new FormData(form)) },
+              {
+                onSuccess: () => form.reset(),
+              },
+            );
+          }}
         >
           <h2>Change password</h2>
           <div className="form-grid">
@@ -101,13 +115,18 @@ export default function Page() {
             responsible for that job. Manage or withdraw this consent from Applications.
           </p>
           <p className="muted text-xs">
-            Email verification and email password recovery are not configured in this release. Keep your
-            password safe.
+            Manage email verification and password recovery in{" "}
+            <Link className="text-link" href="/account-access">
+              Account access
+            </Link>
+            .
           </p>
         </section>
         <form
           className="panel stack"
-          action={(form) => {
+          onSubmit={(event) => {
+            event.preventDefault();
+            const form = new FormData(event.currentTarget);
             if (
               window.confirm(
                 "Permanently delete your account, resumes, applications, and analyses? This cannot be undone.",

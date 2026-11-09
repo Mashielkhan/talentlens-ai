@@ -9,6 +9,8 @@ test("real applicant and recruiter journey", async ({ browser }) => {
     recruiterContext = await browser.newContext();
   const applicant = await applicantContext.newPage(),
     recruiter = await recruiterContext.newPage();
+  const pageErrors: string[] = [];
+  for (const page of [applicant, recruiter]) page.on("pageerror", (error) => pageErrors.push(error.message));
   const suffix = Date.now();
   for (const [page, role] of [
     [recruiter, "recruiter"],
@@ -34,6 +36,12 @@ test("real applicant and recruiter journey", async ({ browser }) => {
     .fill("Build Python backend REST APIs using FastAPI and PostgreSQL with Docker containers.");
   await recruiter.getByLabel(/Required skills/).fill("Python:5, FastAPI:4, PostgreSQL:3");
   await recruiter.getByLabel("Visibility").selectOption("PUBLISHED");
+  await recruiter.getByRole("button", { name: "Save job" }).click();
+  await expect(
+    recruiter.getByRole("alert").filter({ hasText: "Review and confirm requirements" }),
+  ).toBeVisible();
+  await expect(recruiter.getByLabel("Job title")).toHaveValue("Synthetic Python Backend Engineer");
+  await expect(recruiter.getByLabel(/Required skills/)).toHaveValue("Python:5, FastAPI:4, PostgreSQL:3");
   await recruiter.getByLabel(/I reviewed these requirements/).check();
   await recruiter.getByRole("button", { name: "Save job" }).click();
   await expect(recruiter).toHaveURL(/\/jobs\/[a-f0-9-]+$/);
@@ -96,6 +104,41 @@ test("real applicant and recruiter journey", async ({ browser }) => {
   await expect(applicant.getByRole("button", { name: "Save draft", exact: true })).toBeDisabled();
   await applicant.reload();
   await expect(applicant.getByRole("link", { name: "Download CV PDF", exact: true })).toHaveCount(0);
+  const draftUrl = applicant.url();
+  await applicant.goto("/resumes");
+  await applicant.getByRole("link", { name: /Review synthetic-01/ }).click();
+  await applicant.getByRole("button", { name: "Correct extraction", exact: true }).click();
+  await applicant.getByLabel("name", { exact: true }).fill("Synthetic Corrected Applicant");
+  await applicant
+    .getByLabel("summary", { exact: true })
+    .fill("A corrected synthetic summary describing Python API work.");
+  await applicant.route(
+    "**/api/v1/resumes/*",
+    (route) =>
+      route.request().method() === "PATCH"
+        ? route.fulfill({
+            status: 503,
+            contentType: "application/json",
+            body: JSON.stringify({ detail: "Synthetic correction failure" }),
+          })
+        : route.continue(),
+    { times: 1 },
+  );
+  await applicant.getByRole("button", { name: "Save and reprocess" }).click();
+  await expect(
+    applicant.getByRole("alert").filter({ hasText: "Synthetic correction failure" }),
+  ).toBeVisible();
+  await expect(applicant.getByLabel("name", { exact: true })).toHaveValue("Synthetic Corrected Applicant");
+  await expect(applicant.getByLabel("summary", { exact: true })).toHaveValue(
+    "A corrected synthetic summary describing Python API work.",
+  );
+  await applicant.getByRole("button", { name: "Save and reprocess" }).click();
+  await expect(applicant.getByText(/Version 2 ·/)).toBeVisible();
+  await expect(applicant.getByText("completed", { exact: true })).toBeVisible({ timeout: 150000 });
+  await expect(applicant.getByText("Synthetic Corrected Applicant", { exact: true })).toBeVisible();
+  await applicant.goto(draftUrl);
+  await expect(applicant.getByRole("alert").filter({ hasText: "original resume changed" })).toBeVisible();
+  await expect(applicant.getByLabel("Full name", { exact: true })).toBeDisabled();
   applicant.once("dialog", (dialog) => dialog.accept());
   await applicant.getByRole("button", { name: "Delete draft", exact: true }).click();
   await expect(applicant).toHaveURL(/\/studio$/);
@@ -110,6 +153,7 @@ test("real applicant and recruiter journey", async ({ browser }) => {
   applicant.once("dialog", (dialog) => dialog.accept());
   await applicant.getByRole("button", { name: "Delete", exact: true }).click();
   await expect(applicant).toHaveURL(/\/resumes$/);
+  expect(pageErrors).toEqual([]);
   await applicantContext.close();
   await recruiterContext.close();
 });

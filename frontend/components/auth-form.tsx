@@ -62,9 +62,12 @@ export function AuthForm({ mode }: { mode: "login" | "register" }) {
     }
   }
   const field = (name: keyof Values, label: string, type = "text", placeholder = "") => (
-    <label className="field">
-      {label}
+    <div className="field">
+      <label htmlFor={`auth-${name}`}>{label}</label>
       <input
+        id={`auth-${name}`}
+        aria-invalid={!!form.formState.errors[name]}
+        aria-describedby={form.formState.errors[name] ? `auth-${name}-error` : undefined}
         {...form.register(name)}
         type={type}
         placeholder={placeholder}
@@ -81,9 +84,11 @@ export function AuthForm({ mode }: { mode: "login" | "register" }) {
         }
       />
       {form.formState.errors[name] && (
-        <span className="field-error">{form.formState.errors[name]?.message}</span>
+        <span id={`auth-${name}-error`} className="field-error">
+          {form.formState.errors[name]?.message}
+        </span>
       )}
-    </label>
+    </div>
   );
   return (
     <div className="auth-layout">

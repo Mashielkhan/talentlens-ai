@@ -10,7 +10,7 @@ A full-stack portfolio application that turns private PDF/DOCX resumes into edit
 
 **Status:** implemented application source with automated tests and deployment configuration. See [the implementation record](docs/implementation-status.md) for checks actually executed and remaining work. Do not interpret source coverage as production verification. No hosted demo has been deployed.
 
-**Verification — November 8, 2026:** 53 backend tests (49 unit/API + 3 PostgreSQL integration + 1 real-model test), 6 frontend unit tests and 2 browser tests passed locally. The Docker browser journey covers resume processing, private analysis, consent, recruiter matching, CV editing/approval, PDF/DOCX downloads, feedback and deletion. Lint, TypeScript and production builds passed. See the [beta verification record](docs/public-beta-verification.md) for evidence and unverified deployment dependencies. This is a development checkpoint, not a production-readiness or hiring-validity claim.
+**Verification — November 9, 2026:** 53 backend tests (49 unit/API + 3 PostgreSQL integration + 1 real-model test), 6 frontend unit tests and 3 browser scenarios passed locally. The Docker browser checks cover resume processing/corrections, private analysis, consent, recruiter matching, CV editing/approval, PDF/DOCX downloads, failed-save retries, account/password changes, mobile navigation, feedback and deletion. Lint, TypeScript and production builds passed. See the [beta verification record](docs/public-beta-verification.md) for evidence and unverified deployment dependencies. This is a development checkpoint, not a production-readiness or hiring-validity claim.
 
 ## What it does
 

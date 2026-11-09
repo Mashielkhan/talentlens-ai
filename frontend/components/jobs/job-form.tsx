@@ -56,7 +56,13 @@ export function JobForm({ job, company = "" }: { job?: Job; company?: string }) 
     });
   }
   return (
-    <form action={submit} className="panel stack">
+    <form
+      onSubmit={(event) => {
+        event.preventDefault();
+        submit(new FormData(event.currentTarget));
+      }}
+      className="panel stack"
+    >
       <ErrorBox error={save.error || suggest.error} />
       <div className="form-grid">
         <label className="field">
@@ -80,9 +86,10 @@ export function JobForm({ job, company = "" }: { job?: Job; company?: string }) 
             defaultValue={job?.company || company}
           />
         </label>
-        <label className="field full">
-          Responsibilities & qualifications
+        <div className="field full">
+          <label htmlFor="job-description">Responsibilities & qualifications</label>
           <textarea
+            id="job-description"
             name="description"
             required
             minLength={40}
@@ -92,7 +99,7 @@ export function JobForm({ job, company = "" }: { job?: Job; company?: string }) 
             className="!min-h-48"
             placeholder="Describe the work and the qualifications relevant to this role. Exclude demographic criteria."
           />
-        </label>
+        </div>
         <div className="full">
           <Button
             type="button"
